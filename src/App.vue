@@ -1,23 +1,19 @@
 <template>
   <v-app>
-    <v-app-bar
-      app
-      color="primary"
-      dark
-    >
-    </v-app-bar>
-
+    <the-header>
+    </the-header>
     <v-main>
     </v-main>
   </v-app>
 </template>
 
 <script>
+import TheHeader from "./components/TheHeader.vue"
 
 export default {
   name: 'App',
-
   components: {
+    TheHeader
   },
 
   data: () => ({
