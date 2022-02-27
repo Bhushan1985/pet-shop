@@ -1,5 +1,5 @@
 <template>
-	<v-app-bar app dark color="green">
+	<v-app-bar app dark clipped-left color="base">
 		<v-spacer></v-spacer>
 		<v-app-bar-nav-icon>
 			<img src="@/assets/Vector.svg" width="31px" height="29px" alt="" />
