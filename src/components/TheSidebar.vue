@@ -20,13 +20,13 @@ export default {
 	data() {
 		return {
 			navItems:[
-				{title: 'Dashboard', icon: 'mdi-tune', link: '/#/'},
-				{title: 'All tickets', icon: 'mdi-subtitles', link: '/#/'},
-				{title: 'Shipment Locator', icon: 'mdi-map-marker', link: '/#/'},
+				{title: 'Dashboard', icon: 'mdi-tune', link: '#/'},
+				{title: 'All tickets', icon: 'mdi-subtitles', link: '#/tickets'},
+				{title: 'Shipment Locator', icon: 'mdi-map-marker', link: '#/locator'},
 				{title: 'Customers', icon: 'mdi-account-multiple', link: '#/customers'},
-				{title: 'Products', icon: 'mdi-folder-outline', link: '/#/'},
+				{title: 'Products', icon: 'mdi-folder-outline', link: '#/products'},
 			],
-			selectedItem: 3
+			selectedItem: 0
 		}
 	}
 }
