@@ -2,6 +2,7 @@ import axios from 'axios'
 
 export default class BaseDataService {
   constructor () {
+    const token = localStorage.getItem('principal')
     this.http = axios.create({ baseURL: process.env.VUE_APP_BASEURL })
     this.cancelToken = axios.CancelToken
     this.source = undefined
@@ -12,7 +13,7 @@ export default class BaseDataService {
     )
 
     this.http.interceptors.request.use(config => {
-      config.headers['Authorization'] = ''
+      config.headers['Authorization'] = 'Bearer ' + token
       return config
     })
   }

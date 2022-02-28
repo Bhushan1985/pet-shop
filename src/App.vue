@@ -11,8 +11,9 @@
 </template>
 
 <script>
-import TheHeader from "./components/TheHeader.vue"
-import TheSidebar from "./components/TheSidebar.vue"
+import TheHeader from "./components/TheHeader"
+import TheSidebar from "./components/TheSidebar"
+import identitySvc from "./services/identity.service"
 
 export default {
   name: 'App',
@@ -20,9 +21,12 @@ export default {
     TheHeader,
     TheSidebar
   },
-
-  data: () => ({
-    //
-  }),
+  async mounted() {
+    try {
+      await identitySvc.logIn()
+    } catch (err) {
+      console.log('Error', err)
+    }
+  }
 };
 </script>
