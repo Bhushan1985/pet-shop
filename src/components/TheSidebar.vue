@@ -1,5 +1,5 @@
 <template>
-	<v-navigation-drawer app clipped permanent color="lighten1">
+	<v-navigation-drawer app clipped permanent width="220" color="lighten1">
 		<v-list-item-group
         v-model="selectedItem"
 				active-class="bg-active"
