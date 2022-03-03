@@ -31,8 +31,8 @@
     </v-row>
   </v-container>
 </template>
-
 <script>
+import debounce from "lodash/debounce"
 export default {
   mounted () {
     if(localStorage.getItem('filter')) {
@@ -61,10 +61,10 @@ export default {
     hasValue (value) {
       return value !== null && value !== undefined && value !== ''
     },
-    updateFilter () {
+    updateFilter: debounce(function () {
       localStorage.setItem('filter', JSON.stringify(this.toJSON()))
       this.$emit('change', this.dataModel)
-    },
+    }, 500),
     toJSON () {
       const output = {}
       Object.entries(this.dataModel).forEach(([key, value]) => {
