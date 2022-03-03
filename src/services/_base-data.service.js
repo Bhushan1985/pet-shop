@@ -46,6 +46,11 @@ export default class BaseDataService {
     return this.http({ url, method, data, params })
       .then(response => fixResponse(response, DataItemType))
   }
+
+  remove (url, params, DataItemType) {
+    return this.http({ url, method: 'delete', params })
+      .then(response => fixResponse(response, DataItemType))
+  }
 }
 
 function fixResponse (response, DataItemType) {

@@ -55,7 +55,7 @@
 				</template>
 				<template v-slot:[`item.actions`]="{ item }">
 					<div class="action-buttons" v-show="selectedId === item.id">
-						<v-btn class="mr-1" fab x-small v-show="isDelete"> 
+						<v-btn class="mr-1" fab x-small v-show="isDelete" @click="deleteCustomer(item.id)"> 
 							<v-icon color="green">mdi-check</v-icon>
 						</v-btn>
 						<v-btn class="mr-1" fab x-small v-show="isDelete" @click="isDelete=false"> 
@@ -147,6 +147,15 @@ export default {
 		async updateFilter (filter) {
 			this.filter = filter
 			await this.loadData()
+		},
+		async deleteCustomer (id) {
+			try {
+				this.isDelete=false
+				await customerSvc.deleteCustomer(id)
+				this.loadData()
+			} catch (err) {
+				console.log('Error', err)
+			}
 		}
 	},
 	filters: {

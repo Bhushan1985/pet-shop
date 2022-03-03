@@ -9,6 +9,9 @@ export class CustomerService extends BaseDataService {
     const url = customer.isNew ? 'user/create' : 'admin/user-edit'
     return this.save(url, customer, {}, CustomerModel)
   }
+  deleteCustomer (id) {
+    return this.remove(`admin/user-delete/${id}`, {}, CustomerModel)
+  }
 }
 
 const service = new CustomerService()
