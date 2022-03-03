@@ -26,7 +26,7 @@ export default {
 				{title: 'Customers', icon: 'mdi-account-multiple', link: '#/customers'},
 				{title: 'Products', icon: 'mdi-folder-outline', link: '#/products'},
 			],
-			selectedItem: 0
+			selectedItem: 3
 		}
 	}
 }

@@ -6,15 +6,16 @@ export class CustomerModel extends BaseModel {
     
     const d = data || {}
 
-    this.firstName = d.first_name
-    this.lastName = d.last_name
+    this.first_name = d.first_name
+    this.last_name = d.last_name
     this.email = d.email
-    this.emailVerifiedAt = d.email_verified_at
+    this.email_verified_at = d.email_verified_at
     this.avatar = d.avatar
     this.address = d.address
-    this.phoneNumber = d.phone_number
-    this.isMarketing = d.is_marketing
-    this.profile = ''
+    this.phone_number = d.phone_number
+    this.is_marketing = d.is_marketing
+    this.password = d.password
+    this.password_confirmation = d.password_confirmation
   }
 
   get isNew () {

@@ -36,6 +36,15 @@ export default class BaseDataService {
     return this.http.get(url, config)
       .then(response => fixResponse(response, DataItemType))
   }
+
+  save (url, data, params, DataItemType) {
+    const method = data.isNew ? 'post' : 'put'
+    const key = data.id
+    if (key && !data.isNew) url += '/' + key
+
+    return this.http({ url, method, data, params })
+      .then(response => fixResponse(response, DataItemType))
+  }
 }
 
 function fixResponse (response, DataItemType) {
