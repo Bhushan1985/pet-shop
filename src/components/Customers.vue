@@ -25,11 +25,12 @@
 						</customer-dialog>
 						
 						<v-divider class="mx-4" vertical></v-divider>
-						<v-btn text>
+						<v-btn text @click="overlay = !overlay">
 							FILTER
 							<v-icon>mdi-chevron-down</v-icon>
 						</v-btn>	
 					</v-toolbar>
+					<customer-filter-bar v-if="overlay" @change="updateFilter"></customer-filter-bar>
 					<v-divider></v-divider>
 				</template>
 				<template v-slot:[`item.first_name`]="{ item }">
@@ -44,11 +45,11 @@
 					</div>
 					<span class="grey--text">{{ item.createdAt | formatDate  }}</span>
 				</template>
-				<template v-slot:[`item.isMarketing`]="{ item }">
-					<v-avatar color="green" size="33" v-if="item.isMarketing">
+				<template v-slot:[`item.is_marketing`]="{ item }">
+					<v-avatar v-if="item.is_marketing" color="green" size="33">
 						<span class="white--text">Yes</span>
 					</v-avatar>
-					<v-avatar color="orange" size="33" v-else>
+					<v-avatar v-else color="orange" size="33">
 						<span class="white--text">No</span>
 					</v-avatar>
 				</template>
@@ -85,7 +86,8 @@ import customerSvc from '../services/customer.service';
 export default {
   components: {
     'customer-edit': () => import('../components/CustomerEdit.vue'),
-		'customer-dialog': () => import('../components/Dialog.vue')
+		'customer-dialog': () => import('../components/Dialog.vue'),
+		'customer-filter-bar': () => import('../components/FilterBar.vue')
   },
 	data () {
 		return {
@@ -95,14 +97,16 @@ export default {
         { text: "Phone", value: "phone_number", sortable: false },
         { text: "Address", value: "address", sortable: false },
 				{ text: "Date created", value: "createdAt", align: 'center', width: '11%', sortable: false },
-				{ text: "Marketing preferences", value: "isMarketing", align: 'center', sortable: false },
+				{ text: "Marketing preferences", value: "is_marketing", align: 'center', sortable: false },
         { text: "", value: "actions", sortable: false }
 			],
 			items: [],
 			selectedId: null,
 			isDelete: false,
 			editedItem: new CustomerModel(),
-			isDialogOpen: false
+			isDialogOpen: false,
+			filter: {},
+			overlay: false
 		}
 	},
 	created () {
@@ -111,7 +115,7 @@ export default {
 	methods: {
 		async loadData () {
 			try {
-				const output = await customerSvc.getCustomers();
+				const output = await customerSvc.getCustomers(this.filter);
 				this.items = output.data;
 			} catch (err) {
 				console.log('Error', err)
@@ -140,6 +144,10 @@ export default {
 			this.editedItem = Object.assign({}, item)
 			this.isDialogOpen = true
 		},
+		async updateFilter (filter) {
+			this.filter = filter
+			await this.loadData()
+		}
 	},
 	filters: {
     formatDate: function (value, isDate) {

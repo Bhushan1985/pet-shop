@@ -24,13 +24,14 @@ export default class BaseDataService {
     this.source = this.cancelToken.source()
   }
 
-  async getAll (url, DataItemType) {
+  async getAll (url, DataItemType, filter) {
     await this.makeCancelTokenSource()
-    return this.fetch(url, DataItemType, this.source.token)
+    const modifiedFilter = Object.entries(filter).reduce((output,[key,value]) => (value ? (output[key]=value, output) : output), {})
+    return this.fetch(url, modifiedFilter, DataItemType, this.source.token)
   }
 
-  fetch (url, DataItemType, cancelToken) {
-    const config = {}
+  fetch (url, params, DataItemType, cancelToken) {
+    const config = {params}
     if (this.source && cancelToken) config.cancelToken = cancelToken
     
     return this.http.get(url, config)
