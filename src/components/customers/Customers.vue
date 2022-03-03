@@ -23,7 +23,6 @@
 								</v-btn>
 							</v-card-actions>
 						</customer-dialog>
-						
 						<v-divider class="mx-4" vertical></v-divider>
 						<v-btn text @click="overlay = !overlay">
 							FILTER
@@ -80,14 +79,14 @@
 	</div>
 </template>
 <script>
-import { CustomerModel } from '../models/customer.model';
-import customerSvc from '../services/customer.service';
+import { CustomerModel } from '../../models/customer.model';
+import customerSvc from '../../services/customer.service';
 
 export default {
   components: {
-    'customer-edit': () => import('../components/CustomerEdit.vue'),
-		'customer-dialog': () => import('../components/Dialog.vue'),
-		'customer-filter-bar': () => import('../components/FilterBar.vue')
+    'customer-edit': () => import('./CustomerEdit.vue'),
+		'customer-dialog': () => import('../core/Dialog.vue'),
+		'customer-filter-bar': () => import('./FilterBar.vue')
   },
 	data () {
 		return {

@@ -11,8 +11,8 @@
 </template>
 
 <script>
-import TheHeader from "./components/TheHeader"
-import TheSidebar from "./components/TheSidebar"
+import TheHeader from "./components/core/TheHeader"
+import TheSidebar from "./components/core/TheSidebar"
 import identitySvc from "./services/identity.service"
 
 export default {

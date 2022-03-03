@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Customers from './components/Customers'
+import Customers from './components/customers/Customers'
 import Dashboard from './components/Dashboard'
-import PageNotFound from './components/PageNotFound'
+import PageNotFound from './components/core/PageNotFound'
 
 Vue.use(Router)
 
