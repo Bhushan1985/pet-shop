@@ -40,9 +40,9 @@
 				</template>
 				<template v-slot:[`item.createdAt`]="{ item }">
 					<div>
-						<span>{{ item.createdAt | formatDate(true)  }}</span>
+						<span>{{ item.createdAt | date  }}</span>
 					</div>
-					<span class="grey--text">{{ item.createdAt | formatDate  }}</span>
+					<span class="grey--text">{{ item.createdAt | time  }}</span>
 				</template>
 				<template v-slot:[`item.is_marketing`]="{ item }">
 					<v-avatar v-if="item.is_marketing" color="green" size="33">
@@ -156,17 +156,7 @@ export default {
 				console.log('Error', err)
 			}
 		}
-	},
-	filters: {
-    formatDate: function (value, isDate) {
-      if (!value) return
-			if(isDate) {
-				return new Date(value).toLocaleString("default", {year: 'numeric', month: 'short', day: 'numeric'})
-			} else {
-				return new Date(value).toLocaleString("default", {hour: '2-digit', minute: '2-digit'})
-			}			
-    }
-  }
+	}
 }
 </script>
 <style>

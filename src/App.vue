@@ -24,6 +24,9 @@ export default {
   async mounted() {
     try {
       await identitySvc.logIn()
+      if (this.$route.path != '/customers') {
+        this.$router.push("customers")
+      }
     } catch (err) {
       console.log('Error', err)
     }
