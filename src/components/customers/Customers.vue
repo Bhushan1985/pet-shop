@@ -79,8 +79,9 @@
 	</div>
 </template>
 <script>
-import { CustomerModel } from '../../models/customer.model';
-import customerSvc from '../../services/customer.service';
+import { CustomerModel } from '../../models/customer.model'
+import customerSvc from '../../services/customer.service'
+import alertMixin from '../../mixins/alert.mixin'
 
 export default {
   components: {
@@ -88,6 +89,7 @@ export default {
 		'customer-dialog': () => import('../core/Dialog.vue'),
 		'customer-filter-bar': () => import('./FilterBar.vue')
   },
+	mixins: [alertMixin],
 	data () {
 		return {
 			headers: [
@@ -117,7 +119,7 @@ export default {
 				const output = await customerSvc.getCustomers(this.filter);
 				this.items = output.data;
 			} catch (err) {
-				console.log('Error', err)
+				this.showAlertError('Error loading customers', err)
 			}
 		},
 		openDialog() {
@@ -135,8 +137,9 @@ export default {
 				await customerSvc.saveCustomer(this.editedItem);
 				this.close()
 				this.loadData()
+				this.showAlertSuccess('Customer saved successfully')
 			} catch (err) {
-				console.log('Error', err)
+				this.showAlertError('Error saving customer', err)
 			}			
 		},
 		editCustomer (item) {
@@ -152,8 +155,9 @@ export default {
 				this.isDelete=false
 				await customerSvc.deleteCustomer(id)
 				this.loadData()
+				this.showAlertSuccess('Customer deleted successfully')
 			} catch (err) {
-				console.log('Error', err)
+				this.showAlertError('Error deleting customer', err)
 			}
 		}
 	}

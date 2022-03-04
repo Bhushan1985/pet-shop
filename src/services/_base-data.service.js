@@ -2,7 +2,7 @@ import axios from 'axios'
 
 export default class BaseDataService {
   constructor () {
-    const token = localStorage.getItem('principal')
+    const token = localStorage.getItem('accesstoken')
     this.http = axios.create({ baseURL: process.env.VUE_APP_BASEURL })
     this.cancelToken = axios.CancelToken
     this.source = undefined
